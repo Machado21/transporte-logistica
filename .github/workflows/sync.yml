@@ -1,21 +1,19 @@
-name: Sync
+name: sync
 
 on:
-  schedule:
-    - cron:  '*/15 * * * *'
+  pull_request:
+    types:
+      - closed
 
 jobs:
-  build:
+  atualizar:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Pull
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git pull origin master
-    - name: Push
-      run: git push origin HEAD:master
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Atualizar repositório
+        run: |
+          git config --global user.email "grmachado12@hotmail.com"
+          git config --global user.name "Machado21"
+          git pull origin master
+          git push origin HEAD:master
